@@ -2,11 +2,10 @@ import sys
 
 commands = ['>','<','+','-','.',',','[',']']
 
-def find_matching_paren(source, i, c):
+def find_matching_paren(source, c):
     paren = 0
     d = {'[':']', ']':'['}
-    s = 1 if c == '[' else -1
-    for k in range(i+s, len(source) if s==1 else 0, s):
+    for k in range(len(source)):
         if source[k]==c:
             paren += 1
         elif source[k]==d[c]:
@@ -39,9 +38,9 @@ def eval(source):
         elif c == ',':
             cells[p] = sys.stdin.read(1)
         elif c == '[' and cells[p] == 0:
-            i = find_matching_paren(source, i, c)
+            i += find_matching_paren(source[i+1:], c)
         elif c == ']' and cells[p] != 0:
-            i = find_matching_paren(source, i, c)
+            i -= find_matching_paren(source[i-1::-1], c) + 1
         i += 1
             
             
