@@ -1,6 +1,6 @@
 import sys
 
-commands = ['>','<','+','-','.',',','[',']']
+commands = '><+-.,[]'
 
 def find_matching_paren(source, c):
     paren = 0
