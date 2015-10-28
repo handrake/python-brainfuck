@@ -42,8 +42,7 @@ def eval(source):
         elif c == ']' and cells[p] != 0:
             i -= find_matching_paren(source[i-1::-1], c) + 1
         i += 1
-            
-            
+
 def main():
     source = ''
     while 1:
