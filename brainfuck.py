@@ -46,7 +46,7 @@ def eval(source):
 def main():
     source = ''
     while 1:
-        line = raw_input("brainfuck>> ")
+        line = input("brainfuck>> ")
         if line == '':break
         source += line
     source = ''.join([c for c in source if c in commands])
