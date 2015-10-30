@@ -4,6 +4,11 @@ from getch import getch
 commands = '><+-.,[]'
 
 class BrainfuckInterpreter:
+    def __init__(self):
+        self.i = 0
+        self.p = 0
+        self.cells = [0]
+
     @staticmethod
     def find_matching_paren(source, c):
         paren = 0
@@ -18,32 +23,29 @@ class BrainfuckInterpreter:
         return -1
 
     def eval(self, source):
-        i = 0
-        p = 0
-        cells = [0]
-        while i != len(source):
-            c = source[i]
+        while self.i != len(source):
+            c = source[self.i]
             if c == '>':
-                if p == len(cells)-1:
-                    cells.append(0)
-                p += 1
+                if self.p == len(self.cells)-1:
+                    self.cells.append(0)
+                self.p += 1
             elif c == '<':
-                if p != 0:
-                    p -= 1
+                if self.p != 0:
+                    self.p -= 1
             elif c == '+':
-                cells[p] += 1
+                self.cells[self.p] += 1
             elif c == '-':
-                cells[p] -= 1
+                self.cells[self.p] -= 1
             elif c == '.':
-                sys.stdout.write(chr(cells[p]))
+                sys.stdout.write(chr(self.cells[self.p]))
                 sys.stdout.flush()
             elif c == ',':
-                cells[p] = ord(getch())
-            elif c == '[' and cells[p] == 0:
-                i += self.find_matching_paren(source[i+1:], c)
-            elif c == ']' and cells[p] != 0:
-                i -= self.find_matching_paren(source[i-1::-1], c) + 1
-            i += 1
+                self.cells[self.p] = ord(getch())
+            elif c == '[' and self.cells[self.p] == 0:
+                self.i += self.find_matching_paren(source[self.i+1:], c)
+            elif c == ']' and self.cells[self.p] != 0:
+                self.i -= self.find_matching_paren(source[self.i-1::-1], c) + 1
+            self.i += 1
 
 def main():
     source = ''
