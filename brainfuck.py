@@ -1,4 +1,5 @@
 import sys
+from getch import getch
 
 commands = '><+-.,[]'
 
@@ -36,7 +37,7 @@ def eval(source):
             sys.stdout.write(chr(cells[p]))
             sys.stdout.flush()
         elif c == ',':
-            cells[p] = sys.stdin.read(1)
+            cells[p] = ord(getch())
         elif c == '[' and cells[p] == 0:
             i += find_matching_paren(source[i+1:], c)
         elif c == ']' and cells[p] != 0:
