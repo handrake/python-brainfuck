@@ -23,6 +23,7 @@ class BrainfuckInterpreter:
         return -1
 
     def eval(self, source):
+        s = ''
         while self.i != len(source):
             c = source[self.i]
             if c == '>':
@@ -39,6 +40,7 @@ class BrainfuckInterpreter:
             elif c == '.':
                 sys.stdout.write(chr(self.cells[self.p]))
                 sys.stdout.flush()
+                s += chr(self.cells[self.p])
             elif c == ',':
                 self.cells[self.p] = ord(getch())
             elif c == '[' and self.cells[self.p] == 0:
@@ -46,6 +48,7 @@ class BrainfuckInterpreter:
             elif c == ']' and self.cells[self.p] != 0:
                 self.i -= self.find_matching_paren(source[self.i-1::-1], c) + 1
             self.i += 1
+        return s
 
 def main():
     source = ''
