@@ -21,7 +21,6 @@ def eval(source):
     cells = [0]
     while i != len(source):
         c = source[i]
-        #print 'i =', i, 'cells =', cells, 'p =', p, 'c =', c, '*p =', cells[p]
         if c == '>':
             if p == len(cells)-1:
                 cells.append(0)
