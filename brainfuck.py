@@ -22,6 +22,15 @@ class BrainfuckInterpreter:
                 paren -= 1
         return -1
 
+    def show_cells(self):
+        print("Cell pointer is at", self.p)
+        for i in range(len(self.cells)):
+            print(i, self.cells[i],end=" ")
+            if self.p == i:
+                print("<-")
+            else:
+                print("")
+
     def eval(self, source):
         s = ''
         while self.i != len(source):
@@ -59,6 +68,7 @@ def main():
     source = ''.join([c for c in source if c in commands])
     interpreter = BrainfuckInterpreter()
     interpreter.eval(source)
+    interpreter.show_cells()
 
 if __name__ == "__main__":
     main()
