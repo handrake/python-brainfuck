@@ -39,9 +39,8 @@ class BrainfuckInterpreter:
                 if self.p == len(self.cells)-1:
                     self.cells.append(0)
                 self.p += 1
-            elif c == '<':
-                if self.p != 0:
-                    self.p -= 1
+            elif c == '<' and self.p != 0:
+                self.p -= 1
             elif c == '+':
                 self.cells[self.p] += 1
             elif c == '-':
