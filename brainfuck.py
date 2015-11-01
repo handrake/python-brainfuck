@@ -20,7 +20,7 @@ class BrainfuckInterpreter:
                 if paren == 0:
                     return k
                 paren -= 1
-        return -1
+        raise SyntaxError("Could not find the matching parenthesis")
 
     def show_cells(self):
         print("Cell pointer is at", self.p)
