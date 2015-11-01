@@ -81,7 +81,7 @@ def main():
     except getopt.GetoptError as err:
         usage()
         sys.exit(2)
-    filename = args[0] if len(args) > 1 else None
+    filename = args[0] if len(args) > 0 else None
     if filename:
         source = open(filename).read()
     else:
