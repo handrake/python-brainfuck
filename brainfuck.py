@@ -20,7 +20,7 @@ class BrainfuckInterpreter:
                 if paren == 0:
                     return k
                 paren -= 1
-        return -1
+        raise SyntaxError("Could not find the matching parenthesis")
 
     def show_cells(self):
         print("Cell pointer is at", self.p)
@@ -58,13 +58,34 @@ class BrainfuckInterpreter:
             self.i += 1
         return s
 
-def main():
+def usage():
+    print("", file=sys.stderr)
+    print("Usage: {0} <filename>".format(__file__), file=sys.stderr)
+    print("", file=sys.stderr)
+    print("For more information, please visit https://github.com/handrake/brainfuck", file=sys.stderr)
+    print("", file=sys.stderr)
+
+def shell():
     source = ''
     while 1:
         line = input("brainfuck>> ")
         if line == '':break
         source += line
     source = ''.join([c for c in source if c in commands])
+    return source
+
+def main():
+    import getopt
+    try:
+        opts, args = getopt.getopt(sys.argv[1:], "", [])
+    except getopt.GetoptError as err:
+        usage()
+        sys.exit(2)
+    filename = args[0] if len(args) > 1 else None
+    if filename:
+        source = open(filename).read()
+    else:
+        source = shell()
     interpreter = BrainfuckInterpreter()
     interpreter.eval(source)
     interpreter.show_cells()
